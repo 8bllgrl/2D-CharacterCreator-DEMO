@@ -86,7 +86,11 @@ public class Game implements Runnable {
         gameThread.start();
     }
 
-    public void setFPS ( int FPS){
+    public CharacterDisplayScreen getDisplayScreen() {
+        return displayScreen;
+    }
+
+    public void setFPS (int FPS){
         this.FPS = FPS;
     }
     ////////////

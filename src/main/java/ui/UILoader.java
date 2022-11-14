@@ -1,5 +1,6 @@
 package ui;
 
+import entities.MiqoCharacter;
 import gamescreens.CharacterDisplayScreen;
 import main.Game;
 
@@ -7,10 +8,18 @@ import java.awt.*;
 
 public class UILoader {
 
-    public UILoader(CharacterDisplayScreen characterDisplayScreen){
+    public int miqoAge;
+    public int appearanceNumber;
+    private MiqoCharacter miqoCharacter;
 
+    public UILoader(CharacterDisplayScreen characterDisplayScreen) {
+        miqoCharacter = characterDisplayScreen.getCharacter();
+        loadDesignatedText();
     }
 
+    private void loadDesignatedText() {
+        miqoAge = miqoCharacter.getAge();
+    }
 
     public void drawUIImproved(Graphics2D g2) {
         drawBackground(g2);
@@ -64,26 +73,41 @@ public class UILoader {
 
         //First Name Button
         g2.drawString("Name", 55, 55);
-        //First Name
-        g2.drawString("Sun Miqo'te", 25, 100);
+
         //Last Name
         g2.drawString("Tia", 300, 100);
         //Gender Button
         g2.drawString("Gender", 47, 162);
         //Voice Button
         g2.drawString("Voice", 25, 300);
-        //Voice text
-        g2.drawString("M:1", 82, 350);
         //Age Button
         g2.drawString("Age", 25, 400);
-        //Age text
-        g2.drawString("X", 100, 450);
         //Appearance Button
         g2.drawString("Appearance", 500, 52);
-        //Appearance Text
-        g2.drawString("m-1", 555, 100);
+
 
     }
+
+    public void drawUIValueText(Graphics2D g2) {
+        //First Name
+        g2.drawString("Sun Miqo'te", 25, 100);
+        //Voice text
+        g2.drawString("M:1", 82, 350);
+        //Age text
+        g2.drawString(String.valueOf(miqoAge), 95, 445);
+        //Appearance Text
+        g2.drawString("m-1", 555, 100);
+    }
+
+
+    public void update() {
+        miqoAge = miqoCharacter.getAge();
+    }
+
+    public void render(Graphics2D g2){
+        drawUIValueText(g2);
+    }
+
 
 }
 

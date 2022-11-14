@@ -23,6 +23,8 @@ public class MiqoCharacter extends Entity {
     private String firstName;
     private String lastName;
     private EnumCharacterAction action = EnumCharacterAction.WALK;
+    private int age;
+    private int voiceNumber;
 
 
     //util:
@@ -36,6 +38,7 @@ public class MiqoCharacter extends Entity {
         this.firstName = "datih";
         this.lastName = "Nunh";
         this.tribeLetter = "H'";
+        this.age = 25;
 
         loadAnimation();
         loadButtons();
@@ -109,8 +112,10 @@ public class MiqoCharacter extends Entity {
     }
     private void loadButtons() {
         arrowButtons = new InfluencerButton[2];
-        arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP);
-        arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN);
+        arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP,this);
+        arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN,this);
+        System.out.println(arrowButtons[0].getBounds());
+        System.out.println(arrowButtons[1].getBounds());
     }
     private static int miqoGetSpriteAmount() {
         return 8;
@@ -119,6 +124,40 @@ public class MiqoCharacter extends Entity {
 
 
     ////////////////
+
+
+    public int getAppearanceIndex() {
+        return appearanceIndex;
+    }
+
+    public EnumGender getGender() {
+        return gender;
+    }
+
+    public String getTribeLetter() {
+        return tribeLetter;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public InfluencerButton[] getArrowButtons() {
+        return arrowButtons;
+    }
+
     public void setRandomFirstName() {
         String[] firstNamesChoices;
         int max;
@@ -131,4 +170,6 @@ public class MiqoCharacter extends Entity {
         }
 
     }
+
+
 }

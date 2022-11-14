@@ -13,10 +13,10 @@ GameScreen {
         this.game = game;
     }
 
-    public boolean isIn(MouseEvent e, InfluencerButton arrowButton){
-//        return arrowButton.getBounds().contains(e.getX(), e.getY());
-        return true;
+    public boolean isIn(MouseEvent e, InfluencerButton influencerButton){
+        return influencerButton.getBounds().contains(e.getX(),e.getY());
     }
+
     public Game getGame() {
         return game;
     }

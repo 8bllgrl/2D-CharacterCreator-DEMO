@@ -2,6 +2,7 @@ package gamescreens;
 
 import entities.MiqoCharacter;
 import main.Game;
+import ui.InfluencerButton;
 import ui.UILoader;
 
 import java.awt.*;
@@ -12,6 +13,7 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
 
     private MiqoCharacter character;
     private UILoader uiLoader;
+    private InfluencerButton[] influencerButtons;
 
 
     public CharacterDisplayScreen(Game game) {
@@ -20,14 +22,16 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     }
 
     private void initClasses() {
+        character = new MiqoCharacter(215, 90, 315, 415, this);
         uiLoader = new UILoader(this);
-        character = new MiqoCharacter(215, 90, 315, 415,this);
+        influencerButtons = character.getArrowButtons();
     }
 
     @Override
     public void update() {
 
         character.update();
+        uiLoader.update();
 
     }
 
@@ -35,6 +39,7 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     public void draw(Graphics2D g2) {
         uiLoader.drawUIImproved(g2);
         uiLoader.drawUIText(g2);
+        uiLoader.drawUIValueText(g2);
         character.render(g2);
     }
 
@@ -45,16 +50,46 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
 
     @Override
     public void mousePressed(MouseEvent e) {
+        for (InfluencerButton ib : influencerButtons) {
+            if (isIn(e, ib)) {
+                ib.setMousePressed(true);
+            }
+        }
 
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        for (InfluencerButton ib : influencerButtons) {
+            if (isIn(e, ib)) {
+                if (ib.isMousePressed())
+                    ib.applyButtonFunction();
+                break;
+            }
+        }
+
+        resetButtons();
+
+    }
+    private void resetButtons() {
+        for (InfluencerButton ib : influencerButtons)
+            ib.resetBools();
 
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
+
+        for (InfluencerButton ib : influencerButtons) {
+            ib.setMouseOver(false);
+        }
+        for (InfluencerButton ib : influencerButtons) {
+            if (isIn(e,ib)){
+                ib.setMouseOver(true);
+                break;
+            }
+        }
+
 
     }
 
@@ -66,5 +101,9 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public MiqoCharacter getCharacter() {
+        return character;
     }
 }
