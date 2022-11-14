@@ -30,10 +30,8 @@ public class InfluencerButton {
     private void loadAppearance() {
         if(buttonProperty == EnumInfluencerButtonProperty.AGE_UP){
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.NEXT_ARROW_BUTTON);
-            System.out.println("loaded age up button");
         } else {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
-            System.out.println("loaded other button");
         }
     }
 

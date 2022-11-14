@@ -111,7 +111,6 @@ public class MiqoCharacter extends Entity {
         arrowButtons = new InfluencerButton[2];
         arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP);
         arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN);
-        System.out.println("loaded buttons");
     }
     private static int miqoGetSpriteAmount() {
         return 8;
