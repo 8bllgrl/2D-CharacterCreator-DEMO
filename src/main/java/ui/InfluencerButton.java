@@ -133,7 +133,6 @@ public class InfluencerButton {
                 if (downIndex < 0) {
                     downIndex = 0;
                 }
-                System.out.println(downIndex);
                 miqoCharacter.setAppearanceIndex(downIndex);
                 this.getMiqoCharacter().getDisplayScreen().getUILoader().update();
                 break;

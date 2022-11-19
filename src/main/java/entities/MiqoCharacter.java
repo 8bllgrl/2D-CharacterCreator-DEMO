@@ -42,6 +42,7 @@ public class MiqoCharacter extends Entity {
         this.age = 25;
 
         loadAnimationMale();
+        loadAnimationFemale();
         loadButtons();
 
         //TODO
@@ -76,7 +77,11 @@ public class MiqoCharacter extends Entity {
 
     public void render(Graphics2D g2) {
 //        g2.drawImage(tempAnimationWalking[animationIndex], x, y, width, height, null);
-        g2.drawImage(animationMale[appearanceIndex][animationIndex], x, y, width, height, null);
+        if (gender == EnumGender.MALE){
+            g2.drawImage(animationMale[appearanceIndex][animationIndex], x, y, width, height, null);
+        } else if (gender == EnumGender.FEMALE){
+            g2.drawImage(animationFemale[appearanceIndex][animationIndex], x, y, width, height, null);
+        }
 
         for (InfluencerButton ib : arrowButtons) {
             ib.draw(g2);
@@ -86,12 +91,13 @@ public class MiqoCharacter extends Entity {
     public void update() {
 //        System.out.println("update");
         updateAnimationTick();
-//        updateGenderAppearance();
-
-//        updateAnimationTickTwo();
+        updateGenderAppearance();
+        //update age size / check age size, does math based on the difference between the age and if it is 18. Only does it once.
     }
 
     private void updateGenderAppearance() {
+
+
     }
 
     public void drawInfluencerUI(Graphics2D g2) {
@@ -122,11 +128,11 @@ public class MiqoCharacter extends Entity {
     private void loadAnimationFemale() {
         //TODO
         //How to make it so that both of the images get loaded, but which one gets displayed is determinate on the gender.
-        BufferedImage img = AssetLoader.GetSpriteAtlas(AssetLoader.CHARACTER_SPRITESHEET_M);
-        animationMale = new BufferedImage[6][8];
-        for (int j = 0; j < animationMale.length; j++) {
-            for (int i = 0; i < animationMale[j].length; i++) {
-                animationMale[j][i] = img.getSubimage(i * 400, j * 500, 400, 500);
+        BufferedImage img = AssetLoader.GetSpriteAtlas(AssetLoader.CHARACTER_SPRITESHEET_F);
+        animationFemale = new BufferedImage[6][8];
+        for (int j = 0; j < animationFemale.length; j++) {
+            for (int i = 0; i < animationFemale[j].length; i++) {
+                animationFemale[j][i] = img.getSubimage(i * 400, j * 500, 400, 500);
             }
         }
     }
