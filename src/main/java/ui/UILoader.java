@@ -1,5 +1,6 @@
 package ui;
 
+import entities.EnumGender;
 import entities.MiqoCharacter;
 import gamescreens.CharacterDisplayScreen;
 import main.Game;
@@ -11,6 +12,7 @@ public class UILoader {
     public int miqoAge;
     public int appearanceNumber;
     private MiqoCharacter miqoCharacter;
+    private String miqoGender;
 
     public UILoader(CharacterDisplayScreen characterDisplayScreen) {
         miqoCharacter = characterDisplayScreen.getCharacter();
@@ -19,6 +21,7 @@ public class UILoader {
 
     private void loadDesignatedText() {
         miqoAge = miqoCharacter.getAge();
+        setGenderText();
     }
 
     public void drawUIImproved(Graphics2D g2) {
@@ -42,6 +45,7 @@ public class UILoader {
         drawDisplayBoxBlack(75, 315, 70, 45, g2); //VOICE
         drawDisplayBoxBlack(75, 415, 70, 45, g2); //AGE
         drawDisplayBoxBlack(550, 65, 70, 45, g2); //APPEARANCE
+        drawDisplayBoxBlack(75,182,55,40,g2); //GENDER
 
 
     }
@@ -88,6 +92,20 @@ public class UILoader {
 
     }
 
+    public String getMiqoGender() {
+        return miqoGender;
+    }
+
+    private void setGenderText(){
+       EnumGender temp = miqoCharacter.getGender();
+       if (temp == EnumGender.MALE){
+           miqoGender = "M";
+       } else if (temp == EnumGender.FEMALE){
+           miqoGender = "F";
+       }
+//        System.out.println("set gender text");
+    }
+
     public void drawUIValueText(Graphics2D g2) {
         //First Name
         g2.drawString("Sun Miqo'te", 25, 100);
@@ -97,11 +115,14 @@ public class UILoader {
         g2.drawString(String.valueOf(miqoAge), 95, 445);
         //Appearance Text
         g2.drawString("m-1", 555, 100);
+        //Gender Text
+        g2.drawString(getMiqoGender(),88,210);
     }
 
 
     public void update() {
         miqoAge = miqoCharacter.getAge();
+        setGenderText();
     }
 
     public void render(Graphics2D g2){

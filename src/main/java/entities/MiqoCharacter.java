@@ -11,9 +11,11 @@ import java.util.Random;
 
 public class MiqoCharacter extends Entity {
 
-    private BufferedImage[][] animation;
+    private BufferedImage[][] animationFemale;
+    private BufferedImage[][] animationMale;
+
     private BufferedImage[] tempAnimationWalking;
-    private int appearanceIndex = 1;
+    private int appearanceIndex = 0;
     private static final int animationSpeed = 60;
 
     private InfluencerButton[] arrowButtons;
@@ -25,7 +27,6 @@ public class MiqoCharacter extends Entity {
     private EnumCharacterAction action = EnumCharacterAction.WALK;
     private int age;
     private int voiceNumber;
-
 
     //util:
     private Random randomizer;
@@ -40,7 +41,7 @@ public class MiqoCharacter extends Entity {
         this.tribeLetter = "H'";
         this.age = 25;
 
-        loadAnimation();
+        loadAnimationMale();
         loadButtons();
 
         //TODO
@@ -75,7 +76,7 @@ public class MiqoCharacter extends Entity {
 
     public void render(Graphics2D g2) {
 //        g2.drawImage(tempAnimationWalking[animationIndex], x, y, width, height, null);
-        g2.drawImage(animation[0][animationIndex], x, y, width, height, null);
+        g2.drawImage(animationMale[appearanceIndex][animationIndex], x, y, width, height, null);
 
         for (InfluencerButton ib : arrowButtons) {
             ib.draw(g2);
@@ -85,7 +86,12 @@ public class MiqoCharacter extends Entity {
     public void update() {
 //        System.out.println("update");
         updateAnimationTick();
+//        updateGenderAppearance();
+
 //        updateAnimationTickTwo();
+    }
+
+    private void updateGenderAppearance() {
     }
 
     public void drawInfluencerUI(Graphics2D g2) {
@@ -94,31 +100,58 @@ public class MiqoCharacter extends Entity {
 
     //TODO
     private void loadAnimationsArray() {
-        BufferedImage img = AssetLoader.GetSpriteAtlas(AssetLoader.CHARACTER_SPRITESHEET);
+        BufferedImage img = AssetLoader.GetSpriteAtlas(AssetLoader.CHARACTER_SPRITESHEET_M);
         tempAnimationWalking = new BufferedImage[7];
         for (int i = 0; i < tempAnimationWalking.length; i++) {
             tempAnimationWalking[i] = img.getSubimage(i * 400, 0 * 500, 400, 500);
         }
     }
 
-    private void loadAnimation() {
-        BufferedImage img = AssetLoader.GetSpriteAtlas(AssetLoader.CHARACTER_SPRITESHEET);
-        animation = new BufferedImage[3][8];
-        for (int j = 0; j < animation.length; j++) {
-            for (int i = 0; i < animation[j].length; i++) {
-                animation[j][i] = img.getSubimage(i * 400, j * 500, 400, 500);
+    private void loadAnimationMale() {
+        //TODO
+        //How to make it so that both of the images get loaded, but which one gets displayed is determinate on the gender.
+        BufferedImage img = AssetLoader.GetSpriteAtlas(AssetLoader.CHARACTER_SPRITESHEET_M);
+        animationMale = new BufferedImage[6][8];
+        for (int j = 0; j < animationMale.length; j++) {
+            for (int i = 0; i < animationMale[j].length; i++) {
+                animationMale[j][i] = img.getSubimage(i * 400, j * 500, 400, 500);
             }
         }
     }
+
+    private void loadAnimationFemale() {
+        //TODO
+        //How to make it so that both of the images get loaded, but which one gets displayed is determinate on the gender.
+        BufferedImage img = AssetLoader.GetSpriteAtlas(AssetLoader.CHARACTER_SPRITESHEET_M);
+        animationMale = new BufferedImage[6][8];
+        for (int j = 0; j < animationMale.length; j++) {
+            for (int i = 0; i < animationMale[j].length; i++) {
+                animationMale[j][i] = img.getSubimage(i * 400, j * 500, 400, 500);
+            }
+        }
+    }
+
+
     private void loadButtons() {
-        arrowButtons = new InfluencerButton[2];
+        arrowButtons = new InfluencerButton[6];
         arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP,this);
         arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN,this);
+        arrowButtons[2] = new InfluencerButton(30,182,40,40,EnumInfluencerButtonProperty.CHANGE_FEMALE,this);
+        arrowButtons[3] = new InfluencerButton(133,182,40,40,EnumInfluencerButtonProperty.CHANGE_MALE,this);
+        arrowButtons[4] = new InfluencerButton(630, 68,EnumInfluencerButtonProperty.APPEARANCE_NEXT,this);
+        arrowButtons[5] = new InfluencerButton(505, 68,EnumInfluencerButtonProperty.APPEARANCE_PREV,this);
         System.out.println(arrowButtons[0].getBounds());
         System.out.println(arrowButtons[1].getBounds());
     }
     private static int miqoGetSpriteAmount() {
         return 8;
+    }
+
+    public void makeShort(int age){
+        width = (width - age);
+        height = height - age;
+        x = x +(age/2);
+        y = y +(age);
     }
 
 
@@ -171,5 +204,35 @@ public class MiqoCharacter extends Entity {
 
     }
 
+    public CharacterDisplayScreen getDisplayScreen() {
+        return displayScreen;
+    }
 
+    public void setGender(EnumGender gender) {
+        this.gender = gender;
+    }
+
+    public void setAppearanceIndex(int appearanceIndex) {
+        this.appearanceIndex = appearanceIndex;
+    }
+
+    public void setTribeLetter(String tribeLetter) {
+        this.tribeLetter = tribeLetter;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public int getVoiceNumber() {
+        return voiceNumber;
+    }
+
+    public void setVoiceNumber(int voiceNumber) {
+        this.voiceNumber = voiceNumber;
+    }
 }

@@ -22,7 +22,7 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     }
 
     private void initClasses() {
-        character = new MiqoCharacter(215, 90, 315, 415, this);
+        character = new MiqoCharacter(215, 85, 315, 415, this);
         uiLoader = new UILoader(this);
         influencerButtons = character.getArrowButtons();
     }
@@ -31,7 +31,6 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     public void update() {
 
         character.update();
-        uiLoader.update();
 
     }
 
@@ -62,15 +61,18 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     public void mouseReleased(MouseEvent e) {
         for (InfluencerButton ib : influencerButtons) {
             if (isIn(e, ib)) {
-                if (ib.isMousePressed())
+                if (ib.isMousePressed()){
                     ib.applyButtonFunction();
+                }
                 break;
             }
         }
 
+
         resetButtons();
 
     }
+
     private void resetButtons() {
         for (InfluencerButton ib : influencerButtons)
             ib.resetBools();
@@ -84,7 +86,7 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
             ib.setMouseOver(false);
         }
         for (InfluencerButton ib : influencerButtons) {
-            if (isIn(e,ib)){
+            if (isIn(e, ib)) {
                 ib.setMouseOver(true);
                 break;
             }
@@ -105,5 +107,9 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
 
     public MiqoCharacter getCharacter() {
         return character;
+    }
+
+    public UILoader getUILoader() {
+        return uiLoader;
     }
 }

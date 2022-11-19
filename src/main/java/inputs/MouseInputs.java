@@ -51,6 +51,5 @@ public class MouseInputs implements MouseListener, MouseMotionListener{
     @Override
     public void mouseMoved(MouseEvent e) {
         gamePainter.getGame().getDisplayScreen().mouseMoved(e);
-
     }
 }

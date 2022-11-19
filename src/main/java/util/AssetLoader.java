@@ -7,11 +7,14 @@ import java.io.InputStream;
 
 public class AssetLoader {
 
-    public static final String CHARACTER_SPRITESHEET = "/character/character_atlas_3app.png";
+    public static final String CHARACTER_SPRITESHEET_M = "/character/character_atlas_3app.png";
+    public static final String CHARACTER_SPRITESHEET_F = "/character/character_atlas_3femae.png";
     public static final String CURSOR_ASSET = "/util/cursorff.png";
     public static final String NEXT_ARROW_BUTTON = "/util/nextarrow.png";
     public static final String PREVIOUS_ARROW_BUTTON = "/util/prevarrow.png";
     public static final String RANDOMIZER_BUTTON = "/util/randomizer.png";
+    public static final String FEMALE_BUTTON = "/util/pinkfemale.png";
+    public static final String MALE_BUTTON = "/util/bluemale.png";
 
     public static final String[] FEMALE_FIRSTNAMES =
             {
@@ -26,6 +29,8 @@ public class AssetLoader {
                     "alih", "alih", "apa", "apa", "atoh", "atoh", "azih", "azih", "bahlo", "behm", "bhem", "bhin", "bhin", "binba", "binba", "chah", "chah", "chai", "chai", "datih", "datih", "falkh", "ghol", "ghol", "holha", "holha", "iaho", "iaho", "inwa", "inwa", "jenma", "jenma", "kayah", "kayah", "khot", "khot", "laqa", "laqa", "linh", "linh", "lohi", "lohi", "mhati", "mhati", "mitu", "mitu", "mona", "mona", "ndae", "ndae", "nhea", "nhea", "nijah", "nijah", "nuloh", "nuloh", "olh", "olh", "phel", "phel", "quih", "quih", "quon", "quon", "raht", "raht", "rhika", "rhika", "rihnn", "rihnn", "rinha", "rinha", "shtah", "shtah", "tenpe", "tenpe", "thub", "thub", "tiqa", "tiqa", "tyada", "tyada", "vanoh", "vanoh", "vett", "vett", "viloh", "viloh", "welhi", "welhi", "weta", "weta", "yhuh", "yhuh", "zhet", "zhet", "zinba", "zinba", "zula", "zula"
             };
     public static BufferedImage character_spritesheet;
+
+    public static int maximumAnimationIndex = 5;
 
     public AssetLoader(){
 

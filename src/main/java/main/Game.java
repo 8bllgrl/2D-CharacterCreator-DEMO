@@ -90,6 +90,7 @@ public class Game implements Runnable {
         return displayScreen;
     }
 
+
     public void setFPS (int FPS){
         this.FPS = FPS;
     }
