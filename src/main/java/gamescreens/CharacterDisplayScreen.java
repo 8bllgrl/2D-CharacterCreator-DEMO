@@ -4,6 +4,7 @@ import entities.MiqoCharacter;
 import main.Game;
 import ui.InfluencerButton;
 import ui.UILoader;
+import util.ConstantsMiqo;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -22,7 +23,13 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     }
 
     private void initClasses() {
-        character = new MiqoCharacter(215, 85, 315, 415, this);
+//        character = new MiqoCharacter(215, 85, 315, 415, this);
+        character = new MiqoCharacter(
+                ConstantsMiqo.ADULT_X,
+                ConstantsMiqo.ADULT_Y,
+                ConstantsMiqo.ADULT_W,
+                ConstantsMiqo.ADULT_H,
+                this);
         uiLoader = new UILoader(this);
         influencerButtons = character.getArrowButtons();
     }

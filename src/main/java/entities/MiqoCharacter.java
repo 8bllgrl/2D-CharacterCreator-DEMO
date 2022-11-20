@@ -41,7 +41,7 @@ public class MiqoCharacter extends Entity {
         this.firstName = "datih";
         this.lastName = "Nunh";
         this.tribeLetter = "H'";
-        this.age = 25;
+        this.age = 2;
         this.ageChecker = age;
 
         loadAnimationMale();
@@ -83,23 +83,95 @@ public class MiqoCharacter extends Entity {
         updateAnimationTick();
         updateGenderAppearance();
         //update age size / check age size, does math based on the difference between the age and if it is 18. Only does it once.
-        if (ageHasChanged()) {
-//                if (ageHasIncreased()) {
-//                    increaseSize();
-//                } else if (ageHasDecreased()) {
-//                    decreaseSize();
-//                    System.out.println("Decrease Reached");
-//                }
-                tempChangeSize();
-        }
+        tempChangeSize();
     }
 
     private void tempChangeSize() {
-        if (age == 17){
+        if (age == 17) {
             height = ConstantsMiqo.SEVENTEEN_HEIGHT;
             width = ConstantsMiqo.SEVENTEEN_WIDTH;
             x = ConstantsMiqo.SEVENTEEN_X;
             y = ConstantsMiqo.SEVENTEEN_Y;
+        } else if (age == 16) {
+            height = ConstantsMiqo.SIXTEEN_HEIGHT;
+            width = ConstantsMiqo.SIXTEEN_WIDTH;
+            x = ConstantsMiqo.SIXTEEN_X;
+            y = ConstantsMiqo.SIXTEEN_Y;
+        } else if (age == 15) {
+            height = ConstantsMiqo.FIFTEEN_HEIGHT;
+            width = ConstantsMiqo.FIFTEEN_WIDTH;
+            x = ConstantsMiqo.FIFTEEN_X;
+            y = ConstantsMiqo.FIFTEEN_Y;
+        } else if (age == 14) {
+            height = ConstantsMiqo.FOURTEEN_HEIGHT;
+            width = ConstantsMiqo.FOURTEEN_WIDTH;
+            x = ConstantsMiqo.FOURTEEN_X;
+            y = ConstantsMiqo.FOURTEEN_Y;
+        } else if (age == 13) {
+            height = ConstantsMiqo.THIRTEEN_HEIGHT;
+            width = ConstantsMiqo.THIRTEEN_WIDTH;
+            x = ConstantsMiqo.THIRTEEN_X;
+            y = ConstantsMiqo.THIRTEEN_Y;
+        } else if (age == 12) {
+            height = ConstantsMiqo.TWELVE_HEIGHT;
+            width = ConstantsMiqo.TWELVE_WIDTH;
+            x = ConstantsMiqo.TWELVE_X;
+            y = ConstantsMiqo.TWELVE_Y;
+        } else if (age == 11) {
+            height = ConstantsMiqo.ELEVEN_HEIGHT;
+            width = ConstantsMiqo.ELEVEN_WIDTH;
+            x = ConstantsMiqo.ELEVEN_X;
+            y = ConstantsMiqo.ELEVEN_Y;
+        } else if (age == 10) {
+            height = ConstantsMiqo.TEN_HEIGHT;
+            width = ConstantsMiqo.TEN_WIDTH;
+            x = ConstantsMiqo.TEN_X;
+            y = ConstantsMiqo.TEN_Y;
+        } else if (age == 9) {
+            height = ConstantsMiqo.NINE_HEIGHT;
+            width = ConstantsMiqo.NINE_WIDTH;
+            x = ConstantsMiqo.NINE_X;
+            y = ConstantsMiqo.NINE_Y;
+        } else if (age == 8) {
+            height = ConstantsMiqo.EIGHT_HEIGHT;
+            width = ConstantsMiqo.EIGHT_WIDTH;
+            x = ConstantsMiqo.EIGHT_X;
+            y = ConstantsMiqo.EIGHT_Y;
+        } else if (age == 7) {
+            height = ConstantsMiqo.SEVEN_HEIGHT;
+            width = ConstantsMiqo.SEVEN_WIDTH;
+            x = ConstantsMiqo.SEVEN_X;
+            y = ConstantsMiqo.SEVEN_Y;
+        } else if (age == 6) {
+            height = ConstantsMiqo.SIX_HEIGHT;
+            width = ConstantsMiqo.SIX_WIDTH;
+            x = ConstantsMiqo.SIX_X;
+            y = ConstantsMiqo.SIX_Y;
+        } else if (age == 5) {
+            height = ConstantsMiqo.FIVE_HEIGHT;
+            width = ConstantsMiqo.FIVE_WIDTH;
+            x = ConstantsMiqo.FIVE_X;
+            y = ConstantsMiqo.FIVE_Y;
+        } else if (age == 4) {
+            height = ConstantsMiqo.FOUR_HEIGHT;
+            width = ConstantsMiqo.FOUR_WIDTH;
+            x = ConstantsMiqo.FOUR_X;
+            y = ConstantsMiqo.FOUR_Y;
+        } else if (age == 3) {
+            height = ConstantsMiqo.THREE_HEIGHT;
+            width = ConstantsMiqo.THREE_WIDTH;
+            x = ConstantsMiqo.THREE_X;
+            y = ConstantsMiqo.THREE_Y;
+        } else if (age == 2) {
+            height = ConstantsMiqo.TWO_HEIGHT;
+            width = ConstantsMiqo.TWO_WIDTH;
+            x = ConstantsMiqo.TWO_X;
+            y = ConstantsMiqo.TWO_Y;
+        } else if (age == 1) {
+            height = ConstantsMiqo.ONE_HEIGHT;
+            width = ConstantsMiqo.ONE_WIDTH;
+            x = ConstantsMiqo.ONE_X;
+            y = ConstantsMiqo.ONE_Y;
         } else {
             height = 415;
             width = 315;
