@@ -41,12 +41,13 @@ public class MiqoCharacter extends Entity {
         this.firstName = "datih";
         this.lastName = "Nunh";
         this.tribeLetter = "H'";
-        this.age = 2;
+        this.age = 25;
         this.ageChecker = age;
 
         loadAnimationMale();
         loadAnimationFemale();
         loadButtons();
+
 
         //TODO
 //        loadAnimationsArray();
@@ -292,15 +293,15 @@ public class MiqoCharacter extends Entity {
 
 
     private void loadButtons() {
-        arrowButtons = new InfluencerButton[6];
+        arrowButtons = new InfluencerButton[8];
         arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP, this);
         arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN, this);
         arrowButtons[2] = new InfluencerButton(30, 182, 40, 40, EnumInfluencerButtonProperty.CHANGE_FEMALE, this);
         arrowButtons[3] = new InfluencerButton(133, 182, 40, 40, EnumInfluencerButtonProperty.CHANGE_MALE, this);
         arrowButtons[4] = new InfluencerButton(630, 68, EnumInfluencerButtonProperty.APPEARANCE_NEXT, this);
         arrowButtons[5] = new InfluencerButton(505, 68, EnumInfluencerButtonProperty.APPEARANCE_PREV, this);
-        System.out.println(arrowButtons[0].getBounds());
-        System.out.println(arrowButtons[1].getBounds());
+        arrowButtons[6] = new InfluencerButton(190, 25,EnumInfluencerButtonProperty.RANDOMIZE_NAME, this);
+        arrowButtons[7] = new InfluencerButton(700, 25,EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE, this);
     }
 
     private static int miqoGetSpriteAmount() {
@@ -394,4 +395,6 @@ public class MiqoCharacter extends Entity {
     public void setVoiceNumber(int voiceNumber) {
         this.voiceNumber = voiceNumber;
     }
+
+
 }

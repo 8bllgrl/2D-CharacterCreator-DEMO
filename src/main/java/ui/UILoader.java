@@ -13,10 +13,14 @@ public class UILoader {
     public int appearanceNumber;
     private MiqoCharacter miqoCharacter;
     private String miqoGender;
+    private String firstName;
+    private String lastName;
 
     public UILoader(CharacterDisplayScreen characterDisplayScreen) {
         miqoCharacter = characterDisplayScreen.getCharacter();
         loadDesignatedText();
+        firstName = miqoCharacter.getTribeLetter() + miqoCharacter.getFirstName();
+        lastName = miqoCharacter.getLastName();
     }
 
     private void loadDesignatedText() {
@@ -77,9 +81,6 @@ public class UILoader {
 
         //First Name Button
         g2.drawString("Name", 55, 55);
-
-        //Last Name
-        g2.drawString("Tia", 300, 100);
         //Gender Button
         g2.drawString("Gender", 47, 162);
         //Voice Button
@@ -108,7 +109,9 @@ public class UILoader {
 
     public void drawUIValueText(Graphics2D g2) {
         //First Name
-        g2.drawString("Sun Miqo'te", 25, 100);
+        g2.drawString(firstName, 25, 100);
+        //Last Name
+        g2.drawString(lastName, 300, 100);
         //Voice text
         g2.drawString("M:1", 82, 350);
         //Age text
@@ -119,10 +122,16 @@ public class UILoader {
         g2.drawString(getMiqoGender(),88,210);
     }
 
+    public void setNameText(){
+        firstName = miqoCharacter.getTribeLetter() + miqoCharacter.getFirstName();
+        lastName = miqoCharacter.getLastName();
+    }
+
 
     public void update() {
         miqoAge = miqoCharacter.getAge();
         setGenderText();
+        setNameText();
     }
 
     public void render(Graphics2D g2){

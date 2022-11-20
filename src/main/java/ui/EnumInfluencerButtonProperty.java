@@ -6,7 +6,10 @@ public enum EnumInfluencerButtonProperty {
     APPEARANCE_NEXT,
     APPEARANCE_PREV,
     CHANGE_MALE,
-    CHANGE_FEMALE;
+    CHANGE_FEMALE,
+    RANDOMIZE_NAME,
+    RANDOMIZE_APPEARANCE,
+    RANDOMIZE_VOICE;
 
 
 }

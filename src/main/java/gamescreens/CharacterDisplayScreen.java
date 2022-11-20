@@ -38,6 +38,7 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     public void update() {
 
         character.update();
+        uiLoader.update();
 
     }
 

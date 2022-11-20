@@ -6,6 +6,8 @@ import util.AssetLoader;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class InfluencerButton {
 
@@ -58,6 +60,10 @@ public class InfluencerButton {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.NEXT_ARROW_BUTTON);
         } else if (buttonProperty == EnumInfluencerButtonProperty.APPEARANCE_PREV) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
+        } else if (buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_NAME
+                || buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_VOICE ||
+                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE) {
+            appearance = AssetLoader.GetSpriteAtlas(AssetLoader.RANDOMIZER_BUTTON);
         }
     }
 
@@ -111,10 +117,14 @@ public class InfluencerButton {
                 break; // if this break is inside of the loop, then the age will turn female. Bad!
             case CHANGE_FEMALE:
                 miqoCharacter.setGender(EnumGender.FEMALE);
+                miqoCharacter.setFirstName(AssetLoader.FEMALE_FIRSTNAMES[0]);
+                miqoCharacter.setLastName("");
                 this.getMiqoCharacter().getDisplayScreen().getUILoader().update();
                 break;
             case CHANGE_MALE:
                 miqoCharacter.setGender(EnumGender.MALE);
+                miqoCharacter.setFirstName(AssetLoader.MALE_FIRSTNAMES[0]);
+                miqoCharacter.setLastName("Nunh");
                 this.getMiqoCharacter().getDisplayScreen().getUILoader().update();
                 break;
             case APPEARANCE_NEXT:
@@ -134,7 +144,27 @@ public class InfluencerButton {
                     downIndex = 0;
                 }
                 miqoCharacter.setAppearanceIndex(downIndex);
-                this.getMiqoCharacter().getDisplayScreen().getUILoader().update();
+                break;
+            case RANDOMIZE_NAME:
+                EnumGender gender = this.getMiqoCharacter().getGender();
+                int min = 0;
+                int max;
+                int randomNum;
+                if (gender == EnumGender.FEMALE) {
+                    max = AssetLoader.FEMALE_FIRSTNAMES.length-1;
+                    randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+
+                    miqoCharacter.setFirstName(AssetLoader.FEMALE_FIRSTNAMES[randomNum]);
+
+                    System.out.println("E");
+                } else if (gender == EnumGender.MALE) {
+                    max = AssetLoader.MALE_FIRSTNAMES.length-1;
+                    randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
+
+                    miqoCharacter.setFirstName(AssetLoader.MALE_FIRSTNAMES[randomNum]);
+                    System.out.println("E");
+                }
+
                 break;
         }
     }
