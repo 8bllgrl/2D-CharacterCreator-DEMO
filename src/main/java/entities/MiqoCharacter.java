@@ -4,6 +4,7 @@ import gamescreens.CharacterDisplayScreen;
 import ui.EnumInfluencerButtonProperty;
 import ui.InfluencerButton;
 import util.AssetLoader;
+import util.ConstantsMiqo;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -26,6 +27,7 @@ public class MiqoCharacter extends Entity {
     private String lastName;
     private EnumCharacterAction action = EnumCharacterAction.WALK;
     private int age;
+    private int ageChecker;
     private int voiceNumber;
 
     //util:
@@ -40,6 +42,7 @@ public class MiqoCharacter extends Entity {
         this.lastName = "Nunh";
         this.tribeLetter = "H'";
         this.age = 25;
+        this.ageChecker = age;
 
         loadAnimationMale();
         loadAnimationFemale();
@@ -49,19 +52,6 @@ public class MiqoCharacter extends Entity {
 //        loadAnimationsArray();
     }
 
-    public void updateAnimationTickTwo() {
-
-        animationTick++;
-        if (animationTick >= animationSpeed) {
-            animationTick = 0;
-            animationIndex++;
-            //this resets it back to the far left side of the animation if it reaches the end of the array!
-            if (animationIndex >= tempAnimationWalking.length) {
-                animationIndex = 0;
-            }
-        }
-
-    }
 
     public void updateAnimationTick() {
         animationTick++;
@@ -77,9 +67,9 @@ public class MiqoCharacter extends Entity {
 
     public void render(Graphics2D g2) {
 //        g2.drawImage(tempAnimationWalking[animationIndex], x, y, width, height, null);
-        if (gender == EnumGender.MALE){
+        if (gender == EnumGender.MALE) {
             g2.drawImage(animationMale[appearanceIndex][animationIndex], x, y, width, height, null);
-        } else if (gender == EnumGender.FEMALE){
+        } else if (gender == EnumGender.FEMALE) {
             g2.drawImage(animationFemale[appearanceIndex][animationIndex], x, y, width, height, null);
         }
 
@@ -93,6 +83,97 @@ public class MiqoCharacter extends Entity {
         updateAnimationTick();
         updateGenderAppearance();
         //update age size / check age size, does math based on the difference between the age and if it is 18. Only does it once.
+        if (ageHasChanged()) {
+//                if (ageHasIncreased()) {
+//                    increaseSize();
+//                } else if (ageHasDecreased()) {
+//                    decreaseSize();
+//                    System.out.println("Decrease Reached");
+//                }
+                tempChangeSize();
+        }
+    }
+
+    private void tempChangeSize() {
+        if (age == 17){
+            height = ConstantsMiqo.SEVENTEEN_HEIGHT;
+            width = ConstantsMiqo.SEVENTEEN_WIDTH;
+            x = ConstantsMiqo.SEVENTEEN_X;
+            y = ConstantsMiqo.SEVENTEEN_Y;
+        } else {
+            height = 415;
+            width = 315;
+            x = 215;
+            y = 85;
+        }
+    }
+
+    private boolean ageHasDecreased() {
+        if (ageChecker > age) {
+            ageChecker = this.age;
+            return true;
+        } else {
+            ageChecker = this.age;
+            return false;
+        }
+    }
+
+    private boolean ageHasIncreased() {
+        if (ageChecker < age) {
+            ageChecker = this.age;
+            return true;
+        } else {
+            ageChecker = this.age;
+            return false;
+        }
+
+    }
+
+    private void increaseSize() {
+        width = (width + age);
+        height = height + age;
+        x = x - (age / 2);
+        y = y - (age);
+
+    }
+
+    private void decreaseSize() {
+        width = (width - age);
+        height = height - age;
+        x = x + (age / 2);
+        y = y + (age);
+
+    }
+
+    private void changeHeightOld() {
+        int ageMath;
+        if (age < 18) {
+            ageMath = age;
+            ageMath = 18 - ageMath;
+
+            height = (height - ageMath);
+            width = (height - ageMath);
+            x = x + (age / 2);
+            y = y + (ageMath);
+        }
+    }
+
+    private boolean ageIsBelowEighteen() {
+        if (age < 18) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean ageHasChanged() {
+        if (ageChecker != this.age) {
+//            ageChecker = this.age;
+//            ageChecker = age;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void updateGenderAppearance() {
@@ -140,26 +221,26 @@ public class MiqoCharacter extends Entity {
 
     private void loadButtons() {
         arrowButtons = new InfluencerButton[6];
-        arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP,this);
-        arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN,this);
-        arrowButtons[2] = new InfluencerButton(30,182,40,40,EnumInfluencerButtonProperty.CHANGE_FEMALE,this);
-        arrowButtons[3] = new InfluencerButton(133,182,40,40,EnumInfluencerButtonProperty.CHANGE_MALE,this);
-        arrowButtons[4] = new InfluencerButton(630, 68,EnumInfluencerButtonProperty.APPEARANCE_NEXT,this);
-        arrowButtons[5] = new InfluencerButton(505, 68,EnumInfluencerButtonProperty.APPEARANCE_PREV,this);
+        arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP, this);
+        arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN, this);
+        arrowButtons[2] = new InfluencerButton(30, 182, 40, 40, EnumInfluencerButtonProperty.CHANGE_FEMALE, this);
+        arrowButtons[3] = new InfluencerButton(133, 182, 40, 40, EnumInfluencerButtonProperty.CHANGE_MALE, this);
+        arrowButtons[4] = new InfluencerButton(630, 68, EnumInfluencerButtonProperty.APPEARANCE_NEXT, this);
+        arrowButtons[5] = new InfluencerButton(505, 68, EnumInfluencerButtonProperty.APPEARANCE_PREV, this);
         System.out.println(arrowButtons[0].getBounds());
         System.out.println(arrowButtons[1].getBounds());
     }
+
     private static int miqoGetSpriteAmount() {
         return 8;
     }
 
-    public void makeShort(int age){
+    public void makeShort(int age) {
         width = (width - age);
         height = height - age;
-        x = x +(age/2);
-        y = y +(age);
+        x = x + (age / 2);
+        y = y + (age);
     }
-
 
 
     ////////////////
