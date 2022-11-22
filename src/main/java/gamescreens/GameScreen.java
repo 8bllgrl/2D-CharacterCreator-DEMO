@@ -3,6 +3,7 @@ package gamescreens;
 import main.Game;
 import ui.InfluencerButton;
 
+import java.awt.*;
 import java.awt.event.MouseEvent;
 
 public class
@@ -14,6 +15,9 @@ GameScreen {
     }
 
     public boolean isIn(MouseEvent e, InfluencerButton influencerButton){
+        return influencerButton.getBounds().contains(e.getX(),e.getY());
+    }
+    public boolean isIn(MouseEvent e, Rectangle influencerButton){
         return influencerButton.getBounds().contains(e.getX(),e.getY());
     }
 

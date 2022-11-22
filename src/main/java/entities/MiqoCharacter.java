@@ -45,6 +45,7 @@ public class MiqoCharacter extends Entity {
         this.age = 25;
         this.ageChecker = age;
         tribeLetterIndex=0;
+        voiceNumber = 0;
 
         loadAnimationMale();
         loadAnimationFemale();
@@ -295,7 +296,7 @@ public class MiqoCharacter extends Entity {
 
 
     private void loadButtons() {
-        arrowButtons = new InfluencerButton[10];
+        arrowButtons = new InfluencerButton[11];
         arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP, this);
         arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN, this);
         arrowButtons[2] = new InfluencerButton(30, 182, 40, 40, EnumInfluencerButtonProperty.CHANGE_FEMALE, this);
@@ -306,6 +307,7 @@ public class MiqoCharacter extends Entity {
         arrowButtons[7] = new InfluencerButton(700, 25, EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE, this);
         arrowButtons[8] = new InfluencerButton(300, 25, EnumInfluencerButtonProperty.NEXT_TRIBE, this);
         arrowButtons[9] = new InfluencerButton(250, 25, EnumInfluencerButtonProperty.PREVIOUS_TRIBE, this);
+        arrowButtons[10] = new InfluencerButton(350, 25, EnumInfluencerButtonProperty.RANDOMIZE_TRIBE, this);
 
     }
 

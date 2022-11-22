@@ -11,7 +11,8 @@ public enum EnumInfluencerButtonProperty {
     RANDOMIZE_APPEARANCE,
     RANDOMIZE_VOICE,
     NEXT_TRIBE,
-    PREVIOUS_TRIBE;
+    PREVIOUS_TRIBE,
+    RANDOMIZE_TRIBE;
 
 
 }

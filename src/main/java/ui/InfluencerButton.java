@@ -48,7 +48,7 @@ public class InfluencerButton {
     }
 
     private void loadAppearance() {
-        if (buttonProperty == EnumInfluencerButtonProperty.AGE_UP ) {
+        if (buttonProperty == EnumInfluencerButtonProperty.AGE_UP) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.NEXT_ARROW_BUTTON);
         } else if (buttonProperty == EnumInfluencerButtonProperty.AGE_DOWN) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
@@ -60,13 +60,14 @@ public class InfluencerButton {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.NEXT_ARROW_BUTTON);
         } else if (buttonProperty == EnumInfluencerButtonProperty.APPEARANCE_PREV) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
-        } else if (buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_NAME
-                || buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_VOICE ||
-                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE) {
+        } else if (buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_NAME ||
+                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_VOICE ||
+                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE ||
+                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_TRIBE) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.RANDOMIZER_BUTTON);
-        } else if (buttonProperty == EnumInfluencerButtonProperty.PREVIOUS_TRIBE){
+        } else if (buttonProperty == EnumInfluencerButtonProperty.PREVIOUS_TRIBE) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
-        } else if (buttonProperty == EnumInfluencerButtonProperty.NEXT_TRIBE){
+        } else if (buttonProperty == EnumInfluencerButtonProperty.NEXT_TRIBE) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.NEXT_ARROW_BUTTON);
         }
     }
@@ -156,14 +157,14 @@ public class InfluencerButton {
                 int max;
                 int randomNum;
                 if (gender == EnumGender.FEMALE) {
-                    max = AssetLoader.FEMALE_FIRSTNAMES.length-1;
+                    max = AssetLoader.FEMALE_FIRSTNAMES.length - 1;
                     randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
                     miqoCharacter.setFirstName(AssetLoader.FEMALE_FIRSTNAMES[randomNum]);
 
 //                    System.out.println("E");
                 } else if (gender == EnumGender.MALE) {
-                    max = AssetLoader.MALE_FIRSTNAMES.length-1;
+                    max = AssetLoader.MALE_FIRSTNAMES.length - 1;
                     randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
                     miqoCharacter.setFirstName(AssetLoader.MALE_FIRSTNAMES[randomNum]);
@@ -172,7 +173,7 @@ public class InfluencerButton {
                 break;
             case NEXT_TRIBE:
                 tribeLetter++;
-                if (tribeLetter >= AssetLoader.TRIBE_LETTERS.length){
+                if (tribeLetter >= AssetLoader.TRIBE_LETTERS.length) {
                     tribeLetter = AssetLoader.TRIBE_LETTERS.length;
                 }
                 miqoCharacter.setTribeLetterIndex(tribeLetter);
@@ -180,9 +181,16 @@ public class InfluencerButton {
                 break;
             case PREVIOUS_TRIBE:
                 tribeLetter--;
-                if (tribeLetter <=0){
-                    tribeLetter=0;
+                if (tribeLetter <= 0) {
+                    tribeLetter = 0;
                 }
+                miqoCharacter.setTribeLetterIndex(tribeLetter);
+                miqoCharacter.setTribeLetter(AssetLoader.TRIBE_LETTERS[tribeLetter]);
+                break;
+            case RANDOMIZE_TRIBE:
+                min =0;
+                max = AssetLoader.TRIBE_LETTERS.length-1;
+                tribeLetter = ThreadLocalRandom.current().nextInt(min, max + 1);
                 miqoCharacter.setTribeLetterIndex(tribeLetter);
                 miqoCharacter.setTribeLetter(AssetLoader.TRIBE_LETTERS[tribeLetter]);
                 break;

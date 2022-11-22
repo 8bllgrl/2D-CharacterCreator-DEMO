@@ -5,6 +5,7 @@ import main.Game;
 import ui.InfluencerButton;
 import ui.UILoader;
 import util.ConstantsMiqo;
+import util.SoundsLoader;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -15,11 +16,16 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     private MiqoCharacter character;
     private UILoader uiLoader;
     private InfluencerButton[] influencerButtons;
+    private Rectangle charbounds;
+
+    //SOUNDS
+    SoundsLoader sound = new SoundsLoader();
 
 
     public CharacterDisplayScreen(Game game) {
         super(game);
         initClasses();
+        createDisplayBoxBounds();
     }
 
     private void initClasses() {
@@ -34,6 +40,9 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
         influencerButtons = character.getArrowButtons();
     }
 
+    private void createDisplayBoxBounds(){
+        charbounds = new Rectangle(283,116,157,360);
+    }
     @Override
     public void update() {
 
@@ -48,7 +57,18 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
         uiLoader.drawUIText(g2);
         uiLoader.drawUIValueText(g2);
         character.render(g2);
+//        g2.setColor(new Color(103, 171, 47, 115));
+//        g2.fillRect(charbounds.x,charbounds.y,charbounds.width,charbounds.height);
     }
+
+    private void playAudio(int i){
+        sound.setFile(i);
+        sound.play();
+    }
+    private void stopAudio(int i){
+        sound.stop();
+    }
+
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -62,6 +82,12 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
                 ib.setMousePressed(true);
             }
         }
+
+        if (isIn(e,charbounds)){
+            System.out.println("Yo.");
+            playAudio(character.getVoiceNumber());
+        }
+
 
     }
 
@@ -120,4 +146,5 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
     public UILoader getUILoader() {
         return uiLoader;
     }
+
 }
