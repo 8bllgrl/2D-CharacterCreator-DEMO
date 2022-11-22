@@ -9,7 +9,9 @@ public enum EnumInfluencerButtonProperty {
     CHANGE_FEMALE,
     RANDOMIZE_NAME,
     RANDOMIZE_APPEARANCE,
-    RANDOMIZE_VOICE;
+    RANDOMIZE_VOICE,
+    NEXT_TRIBE,
+    PREVIOUS_TRIBE;
 
 
 }

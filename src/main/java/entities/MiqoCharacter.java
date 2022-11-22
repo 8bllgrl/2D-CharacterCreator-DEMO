@@ -28,6 +28,7 @@ public class MiqoCharacter extends Entity {
     private EnumCharacterAction action = EnumCharacterAction.WALK;
     private int age;
     private int ageChecker;
+    private int tribeLetterIndex;
     private int voiceNumber;
 
     //util:
@@ -43,6 +44,7 @@ public class MiqoCharacter extends Entity {
         this.tribeLetter = "H'";
         this.age = 25;
         this.ageChecker = age;
+        tribeLetterIndex=0;
 
         loadAnimationMale();
         loadAnimationFemale();
@@ -293,15 +295,18 @@ public class MiqoCharacter extends Entity {
 
 
     private void loadButtons() {
-        arrowButtons = new InfluencerButton[8];
+        arrowButtons = new InfluencerButton[10];
         arrowButtons[0] = new InfluencerButton(155, 420, EnumInfluencerButtonProperty.AGE_UP, this);
         arrowButtons[1] = new InfluencerButton(30, 420, EnumInfluencerButtonProperty.AGE_DOWN, this);
         arrowButtons[2] = new InfluencerButton(30, 182, 40, 40, EnumInfluencerButtonProperty.CHANGE_FEMALE, this);
         arrowButtons[3] = new InfluencerButton(133, 182, 40, 40, EnumInfluencerButtonProperty.CHANGE_MALE, this);
         arrowButtons[4] = new InfluencerButton(630, 68, EnumInfluencerButtonProperty.APPEARANCE_NEXT, this);
         arrowButtons[5] = new InfluencerButton(505, 68, EnumInfluencerButtonProperty.APPEARANCE_PREV, this);
-        arrowButtons[6] = new InfluencerButton(190, 25,EnumInfluencerButtonProperty.RANDOMIZE_NAME, this);
-        arrowButtons[7] = new InfluencerButton(700, 25,EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE, this);
+        arrowButtons[6] = new InfluencerButton(190, 25, EnumInfluencerButtonProperty.RANDOMIZE_NAME, this);
+        arrowButtons[7] = new InfluencerButton(700, 25, EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE, this);
+        arrowButtons[8] = new InfluencerButton(300, 25, EnumInfluencerButtonProperty.NEXT_TRIBE, this);
+        arrowButtons[9] = new InfluencerButton(250, 25, EnumInfluencerButtonProperty.PREVIOUS_TRIBE, this);
+
     }
 
     private static int miqoGetSpriteAmount() {
@@ -396,5 +401,11 @@ public class MiqoCharacter extends Entity {
         this.voiceNumber = voiceNumber;
     }
 
+    public int getTribeLetterIndex() {
+        return tribeLetterIndex;
+    }
 
+    public void setTribeLetterIndex(int tribeLetterIndex) {
+        this.tribeLetterIndex = tribeLetterIndex;
+    }
 }

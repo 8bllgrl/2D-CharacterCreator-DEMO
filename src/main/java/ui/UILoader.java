@@ -15,12 +15,26 @@ public class UILoader {
     private String miqoGender;
     private String firstName;
     private String lastName;
+    private final String femaleABR = "F";
+    private final String maleABR = "M";
+    private String tribeLetter = "A'";
+    private String genderABR;
+
 
     public UILoader(CharacterDisplayScreen characterDisplayScreen) {
         miqoCharacter = characterDisplayScreen.getCharacter();
         loadDesignatedText();
         firstName = miqoCharacter.getTribeLetter() + miqoCharacter.getFirstName();
         lastName = miqoCharacter.getLastName();
+        getGenderABR();
+    }
+
+    private void getGenderABR() {
+        if (miqoCharacter.getGender() == EnumGender.MALE){
+            genderABR = maleABR;
+        } else if (miqoCharacter.getGender() == EnumGender.FEMALE){
+            genderABR = femaleABR;
+        }
     }
 
     private void loadDesignatedText() {
@@ -113,11 +127,11 @@ public class UILoader {
         //Last Name
         g2.drawString(lastName, 300, 100);
         //Voice text
-        g2.drawString("M:1", 82, 350);
+        g2.drawString(genderABR+":1", 82, 350);
         //Age text
         g2.drawString(String.valueOf(miqoAge), 95, 445);
         //Appearance Text
-        g2.drawString("m-1", 555, 100);
+        g2.drawString(genderABR+"-1", 555, 100);
         //Gender Text
         g2.drawString(getMiqoGender(),88,210);
     }
@@ -132,6 +146,7 @@ public class UILoader {
         miqoAge = miqoCharacter.getAge();
         setGenderText();
         setNameText();
+        getGenderABR();
     }
 
     public void render(Graphics2D g2){

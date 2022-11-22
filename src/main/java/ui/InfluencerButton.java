@@ -48,7 +48,7 @@ public class InfluencerButton {
     }
 
     private void loadAppearance() {
-        if (buttonProperty == EnumInfluencerButtonProperty.AGE_UP) {
+        if (buttonProperty == EnumInfluencerButtonProperty.AGE_UP ) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.NEXT_ARROW_BUTTON);
         } else if (buttonProperty == EnumInfluencerButtonProperty.AGE_DOWN) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
@@ -64,6 +64,10 @@ public class InfluencerButton {
                 || buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_VOICE ||
                 buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.RANDOMIZER_BUTTON);
+        } else if (buttonProperty == EnumInfluencerButtonProperty.PREVIOUS_TRIBE){
+            appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
+        } else if (buttonProperty == EnumInfluencerButtonProperty.NEXT_TRIBE){
+            appearance = AssetLoader.GetSpriteAtlas(AssetLoader.NEXT_ARROW_BUTTON);
         }
     }
 
@@ -96,13 +100,14 @@ public class InfluencerButton {
     }
 
     public void applyButtonFunction() {
+        int tribeLetter = miqoCharacter.getTribeLetterIndex();
         switch (buttonProperty) {
             case AGE_UP:
                 int age = miqoCharacter.getAge();
                 if (age < 70) {
                     age++;
                     miqoCharacter.setAge(age);
-                    System.out.println("Age increased");
+//                    System.out.println("Age increased");
                     this.getMiqoCharacter().getDisplayScreen().getUILoader().update();
                 }
                 break; // when this is INSIDE of the loop, when the age reaches the end, it makes the age go down! bad.
@@ -111,7 +116,7 @@ public class InfluencerButton {
                 if (age > 1) {
                     age--;
                     miqoCharacter.setAge(age);
-                    System.out.println("Age decreased");
+//                    System.out.println("Age decreased");
                     this.getMiqoCharacter().getDisplayScreen().getUILoader().update();
                 }
                 break; // if this break is inside of the loop, then the age will turn female. Bad!
@@ -156,15 +161,30 @@ public class InfluencerButton {
 
                     miqoCharacter.setFirstName(AssetLoader.FEMALE_FIRSTNAMES[randomNum]);
 
-                    System.out.println("E");
+//                    System.out.println("E");
                 } else if (gender == EnumGender.MALE) {
                     max = AssetLoader.MALE_FIRSTNAMES.length-1;
                     randomNum = ThreadLocalRandom.current().nextInt(min, max + 1);
 
                     miqoCharacter.setFirstName(AssetLoader.MALE_FIRSTNAMES[randomNum]);
-                    System.out.println("E");
+//                    System.out.println("E");
                 }
-
+                break;
+            case NEXT_TRIBE:
+                tribeLetter++;
+                if (tribeLetter >= AssetLoader.TRIBE_LETTERS.length){
+                    tribeLetter = AssetLoader.TRIBE_LETTERS.length;
+                }
+                miqoCharacter.setTribeLetterIndex(tribeLetter);
+                miqoCharacter.setTribeLetter(AssetLoader.TRIBE_LETTERS[tribeLetter]);
+                break;
+            case PREVIOUS_TRIBE:
+                tribeLetter--;
+                if (tribeLetter <=0){
+                    tribeLetter=0;
+                }
+                miqoCharacter.setTribeLetterIndex(tribeLetter);
+                miqoCharacter.setTribeLetter(AssetLoader.TRIBE_LETTERS[tribeLetter]);
                 break;
         }
     }
