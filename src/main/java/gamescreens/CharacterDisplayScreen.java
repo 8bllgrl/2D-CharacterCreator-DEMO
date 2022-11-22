@@ -84,7 +84,7 @@ public class CharacterDisplayScreen extends GameScreen implements GameScreenMeth
         }
 
         if (isIn(e,charbounds)){
-            System.out.println("Yo.");
+            System.out.println("Hey!");
             playAudio(character.getVoiceNumber());
         }
 

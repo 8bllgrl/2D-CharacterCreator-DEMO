@@ -61,13 +61,13 @@ public class InfluencerButton {
         } else if (buttonProperty == EnumInfluencerButtonProperty.APPEARANCE_PREV) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
         } else if (buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_NAME ||
-                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_VOICE ||
                 buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_APPEARANCE ||
-                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_TRIBE) {
+                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_TRIBE ||
+                buttonProperty == EnumInfluencerButtonProperty.RANDOMIZE_VOICE) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.RANDOMIZER_BUTTON);
-        } else if (buttonProperty == EnumInfluencerButtonProperty.PREVIOUS_TRIBE) {
+        } else if (buttonProperty == EnumInfluencerButtonProperty.PREVIOUS_TRIBE || buttonProperty == EnumInfluencerButtonProperty.PREVIOUS_VOICE) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.PREVIOUS_ARROW_BUTTON);
-        } else if (buttonProperty == EnumInfluencerButtonProperty.NEXT_TRIBE) {
+        } else if (buttonProperty == EnumInfluencerButtonProperty.NEXT_TRIBE || buttonProperty == EnumInfluencerButtonProperty.NEXT_VOICE) {
             appearance = AssetLoader.GetSpriteAtlas(AssetLoader.NEXT_ARROW_BUTTON);
         }
     }
@@ -102,6 +102,7 @@ public class InfluencerButton {
 
     public void applyButtonFunction() {
         int tribeLetter = miqoCharacter.getTribeLetterIndex();
+        int voiceNum = miqoCharacter.getVoiceNumber();
         switch (buttonProperty) {
             case AGE_UP:
                 int age = miqoCharacter.getAge();
@@ -188,12 +189,16 @@ public class InfluencerButton {
                 miqoCharacter.setTribeLetter(AssetLoader.TRIBE_LETTERS[tribeLetter]);
                 break;
             case RANDOMIZE_TRIBE:
-                min =0;
-                max = AssetLoader.TRIBE_LETTERS.length-1;
+                min = 0;
+                max = AssetLoader.TRIBE_LETTERS.length - 1;
                 tribeLetter = ThreadLocalRandom.current().nextInt(min, max + 1);
                 miqoCharacter.setTribeLetterIndex(tribeLetter);
                 miqoCharacter.setTribeLetter(AssetLoader.TRIBE_LETTERS[tribeLetter]);
                 break;
+            case NEXT_VOICE:
+                if (miqoCharacter.getGender() == EnumGender.MALE){
+
+                }
         }
     }
 
